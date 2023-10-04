@@ -1,0 +1,32 @@
+### create an post
+POST http://localhost:3000/api/v1/posts
+Content-Type: application/json
+
+{
+    "title":"buat post lewat api",
+    "body":"buat post body lewat api"
+}
+
+
+### get all post
+GET http://localhost:3000/api/v1/posts?search=hasul
+
+
+
+### get detai post
+GET http://localhost:3000/api/v1/posts/5
+
+
+### update post
+PUT http://localhost:3000/api/v1/posts/5
+Content-Type: application/json
+
+{
+    "title":"update post lewat api",
+    "body":"update post body lewat api"
+}
+
+
+### delete post
+DELETE http://localhost:3000/api/v1/posts/5
+Content-Type: application/json
