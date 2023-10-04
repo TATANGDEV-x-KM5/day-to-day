@@ -1,4 +1,5 @@
 const pool = require('../../externals/postgres');
+const getPagination = require('../../helpers/pagination');
 
 async function create(req, res, next) {
     try {
@@ -16,15 +17,16 @@ async function create(req, res, next) {
 
 async function index(req, res, next) {
     try {
-        const { search } = req.query;
-        let query = "SELECT * FROM posts";
-        if (search) query += ` WHERE title like '%${search}%' OR body like '%${search}%'`;
+        let { limit = 10, page = 1 } = req.query;
 
-        let result = await pool.query(query);
+        let result = await pool.query('SELECT * FROM posts ORDER BY id LIMIT $1 OFFSET $2', [limit, (page - 1) * limit]);
+        let count = await pool.query(`SELECT count(*) FROM posts`);
+        let pagination = getPagination(req, parseInt(count.rows[0].count), parseInt(page), parseInt(limit));
+
         res.status(200).json({
             status: true,
             message: 'OK!',
-            data: result.rows
+            data: { pagination, posts: result.rows }
         });
     } catch (err) {
         next(err);
