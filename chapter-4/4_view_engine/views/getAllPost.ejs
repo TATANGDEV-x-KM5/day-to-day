@@ -1,0 +1,15 @@
+<h1>Article List</h1>
+<a href="/posts/create">Create</a>
+
+<% for(var i=0; i < posts.length; i++) { %>
+    <h3>
+        <%= posts[i].id %>
+    </h3>
+    <p>
+        <%= posts[i].title %>
+    </p>
+    <p>
+        <%= posts[i].body %>
+    </p>
+    <p><b>-------------------------</b></p>
+    <% } %>
