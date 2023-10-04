@@ -17,6 +17,7 @@ async function create(req, res, next) {
 
 async function index(req, res, next) {
     try {
+        console.log(newvariable);
         let { limit = 10, page = 1 } = req.query;
 
         let result = await pool.query('SELECT * FROM posts ORDER BY id LIMIT $1 OFFSET $2', [limit, (page - 1) * limit]);
