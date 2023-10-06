@@ -1,4 +1,4 @@
-POST http://localhost:3000/api/v1/users
+POST http://localhost:4000/api/v1/users
 Content-Type: application/json
 
 {
@@ -7,14 +7,14 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/api/v1/users?limit=10&page=1
+GET http://localhost:4000/api/v1/users?limit=10&page=1
 
 ###
-GET http://localhost:3000/api/v1/users/1
+GET http://localhost:4000/api/v1/users/1
 
 
 ###
-PUT http://localhost:3000/api/v1/users/2
+PUT http://localhost:4000/api/v1/users/2
 Content-Type: application/json
 
 {
@@ -24,4 +24,18 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:3000/api/v1/users/3
+DELETE http://localhost:4000/api/v1/users/3
+
+###
+POST http://localhost:4000/api/v1/posts
+Content-Type: application/json
+
+{
+    "title":"joko",
+    "categories":["express","api","backend"],
+    "authorId":1
+}
+
+
+###
+GET http://localhost:4000/api/v1/posts/1

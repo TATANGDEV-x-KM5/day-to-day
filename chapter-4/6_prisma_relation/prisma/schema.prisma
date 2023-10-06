@@ -27,18 +27,18 @@ model Profile {
 }
 
 model Post {
-  id                Int                 @id @default(autoincrement())
-  title             String
-  isPublished       Boolean             @default(false)
-  authorId          Int
-  author            User                @relation(fields: [authorId], references: [id])
-  CategoriesOnPosts CategoriesOnPosts[]
+  id          Int                 @id @default(autoincrement())
+  title       String
+  isPublished Boolean             @default(false)
+  authorId    Int
+  author      User                @relation(fields: [authorId], references: [id])
+  categories  CategoriesOnPosts[]
 }
 
 model Category {
-  id                Int                 @id @default(autoincrement())
-  name              String
-  CategoriesOnPosts CategoriesOnPosts[]
+  id    Int                 @id @default(autoincrement())
+  name  String
+  posts CategoriesOnPosts[]
 }
 
 model CategoriesOnPosts {
