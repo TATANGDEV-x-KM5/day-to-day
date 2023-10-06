@@ -1,0 +1,27 @@
+POST http://localhost:3000/api/v1/users
+Content-Type: application/json
+
+{
+    "name":"joko",
+    "email":"joko@mail.com"
+}
+
+###
+GET http://localhost:3000/api/v1/users?limit=10&page=1
+
+###
+GET http://localhost:3000/api/v1/users/1
+
+
+###
+PUT http://localhost:3000/api/v1/users/2
+Content-Type: application/json
+
+{
+    "name":"alex",
+    "email":"alex@mail.com"
+}
+
+
+###
+DELETE http://localhost:3000/api/v1/users/3
