@@ -10,13 +10,13 @@ module.exports = {
             categories.forEach(c => {
                 newCategories.push({
                     category: {
-                        create: {
-                            name: c
+                        connectOrCreate: {
+                            where: { id: c.id },
+                            create: { name: c.name }
                         }
                     }
                 });
             });
-
 
             let newPosts = await prisma.post.create({
                 data: {

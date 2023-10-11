@@ -31,8 +31,21 @@ POST http://localhost:4000/api/v1/posts
 Content-Type: application/json
 
 {
-    "title":"joko",
-    "categories":["express","api","backend"],
+    "title":"membuat api bank",
+    "categories":[
+        {
+            "id":1,
+            "name":"express"
+        },
+        {
+            "id":2,
+            "name":"api"
+        },
+        {
+            "id":3,
+            "name":"backend"
+        }
+        ],
     "authorId":1
 }
 

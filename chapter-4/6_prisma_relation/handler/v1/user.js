@@ -7,6 +7,15 @@ module.exports = {
         try {
             let { name, email } = req.body;
 
+            let existUser = await prisma.user.findUnique({ where: { email } });
+            if (existUser) {
+                return res.status(400).json({
+                    status: false,
+                    message: 'Email is already used!',
+                    data: null
+                });
+            }
+
             let newUser = await prisma.user.create({
                 data: {
                     name: name,
@@ -80,6 +89,15 @@ module.exports = {
         try {
             let { id } = req.params;
             let { name, email } = req.body;
+
+            let user = await prisma.user.findUnique({ where: { id: Number(id) } });
+            if (!user) {
+                return res.status(400).json({
+                    status: false,
+                    message: 'Email doesn\'t exist!',
+                    data: null
+                });
+            }
 
             let updateOperation = await prisma.user.update({
                 where: { id: Number(id) },

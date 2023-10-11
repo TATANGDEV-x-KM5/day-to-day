@@ -1,0 +1,143 @@
+openapi: 3.0.3
+info:
+  title: Binar News
+  description: |-
+    Aplikasi ini akan berguna untuk membantu students mendapatkan informasi terbaru tentang kelas yang ada di Binar Academy.
+  contact:
+    email: alex@mail.com
+  version: 1.0.0
+servers:
+  - url: http://localhost/3000/api/v1
+  - url: https://test.binarnews.com/api/v1
+  - url: https://binarnews.com/api/v1
+tags:
+  - name: user
+    description: Everything about your Users
+  - name: post
+    description: Access to Petstore Posts
+paths:
+  '/auth/register':
+    post:
+      tags:
+        - user
+      operationId: post-create-new-user
+      summary: ini summary
+      description: ini description
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "bujang"
+                email:
+                  type: string
+                  example: "bujang@mail.com"
+                password:
+                  type: string
+                  example: "bujang123"
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Created"
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: "bujang"
+                      email:
+                        type: string
+                        example: "bujang@mail.com"
+                      password:
+                        type: string
+                        example: null
+        '400':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Bad Request"
+                  data:
+                    type: object
+                    example: null
+  '/auth/login':
+    post:
+      tags:
+        - user
+      operationId: post-login-user
+      summary: ini summary
+      description: ini description
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "bujang@mail.com"
+                password:
+                  type: string
+                  example: "bujang123"
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                    example: "Created"
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+        '400':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Bad Request"
+                  data:
+                    type: object
+                    example: null
+  requestBodies:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: api_key
+      in: headers
