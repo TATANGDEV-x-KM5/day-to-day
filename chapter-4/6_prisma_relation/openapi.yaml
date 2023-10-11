@@ -12,20 +12,22 @@ servers:
   - url: https://binarnews.com/api/v1
 tags:
   - name: User
-    description: Everything about your Users
+    description: Operations related to users
+  - name: Post
+    description: Operations related to posts
 paths:
   /users:
     post:
       tags:
         - User
       operationId: post-create-new-user
-      summary: ini summary
-      description: ini description
+      summary: Create a new user
+      description: Creates a new user with the provided information.
       requestBody:
         $ref: "#/components/requestBodies/CreateUser"
       responses:
         "201":
-          description: Successful operation
+          description: Successful user creation
           content:
             application/json:
               schema:
@@ -39,21 +41,21 @@ paths:
       tags:
         - User
       operationId: get-fetch-all-user
-      summary: ini summary
-      description: ini description
+      summary: Get all users
+      description: Retrieves a list of all registered users.
       parameters:
         - in: query
           name: page
           schema:
             type: integer
           required: false
-          description: "page of content"
+          description: Page number for pagination.
         - in: query
           name: limit
           schema:
             type: integer
           required: false
-          description: "limit content per page"
+          description: Number of items per page.
       responses:
         "200":
           description: Successful operation
@@ -78,15 +80,15 @@ paths:
       tags:
         - User
       operationId: get-fetch-user-detail
-      summary: ini summary
-      description: ini description
+      summary: Get user details
+      description: Retrieves details of a specific user.
       parameters:
         - in: path
           name: userId
           schema:
             type: integer
           required: true
-          description: "userId wajib diisi"
+          description: The ID of the user to retrieve.
       responses:
         "200":
           description: Successful operation
@@ -99,6 +101,143 @@ paths:
                     properties:
                       data:
                         $ref: "#/components/schemas/UserModel"
+    put:
+      tags:
+        - User
+      operationId: put-update-user
+      summary: Update user details
+      description: Updates details of a specific user.
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+          description: The ID of the user to update.
+      responses:
+        "200":
+          description: Successful user update
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        example: null
+    delete:
+      tags:
+        - User
+      operationId: delete-remove-user
+      summary: Delete user
+      description: Deletes a specific user.
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+          description: The ID of the user to delete.
+      responses:
+        "200":
+          description: Successful user deletion
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        example: null
+  /posts:
+    post:
+      tags:
+        - Post
+      operationId: post-create-post
+      summary: Create a new post
+      description: Creates a new post with the provided information.
+      requestBody:
+        $ref: "#/components/requestBodies/CreatePost"
+      responses:
+        "201":
+          description: Successful post creation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/PostModel"
+    get:
+      tags:
+        - Post
+      operationId: get-fetch-all-post
+      summary: Get all posts
+      description: Retrieves a list of all registered posts.
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+          required: false
+          description: Page number for pagination.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          required: false
+          description: Number of items per page.
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          pagination:
+                            $ref: "#/components/schemas/Pagination"
+                          posts:
+                            type: array
+                            items:
+                              $ref: "#/components/schemas/PostModel"
+  "/posts/{postId}":
+    get:
+      tags:
+        - Post
+      operationId: get-fetch-post-detail
+      summary: Get post details
+      description: Retrieves details of a specific post.
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: integer
+          required: true
+          description: The ID of the post to retrieve.
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/PostModel"
 components:
   schemas:
     BasicResponse:
@@ -112,7 +251,7 @@ components:
           type: string
           example: "success"
     UserModel:
-      title: UserModel
+      title: User
       type: object
       properties:
         id:
@@ -124,6 +263,19 @@ components:
         email:
           type: string
           example: "bujang@mail.com"
+    PostModel:
+      title: Post
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "Software Development Life Cycle"
+        isPublished:
+          type: boolean
+          example: true
     Pagination:
       title: Pagination
       type: object
@@ -153,3 +305,26 @@ components:
               email:
                 type: string
                 example: "bujang@mail.com"
+    CreatePost:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                example: "Software Development Life Cycle"
+              categories:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: "Programming"
+              authorId:
+                type: integer
+                example: 1
