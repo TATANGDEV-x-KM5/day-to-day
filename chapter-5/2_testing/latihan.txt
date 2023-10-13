@@ -1,0 +1,2 @@
+- tambahkan name didalam createUser (unit, integration)
+- tambahkan integration test untuk function getUserByBi (GET /api/v1/users)

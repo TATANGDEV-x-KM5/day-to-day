@@ -10,7 +10,7 @@ describe('test createUser()', () => {
 
     test('test email belum terdaftar -> sukses', async () => {
         try {
-            let email = 'usertest@mail.com';
+            let email = 'usertest1@mail.com';
             let password = 'pasword123';
 
             let result = await createUser(email, password);
@@ -28,7 +28,7 @@ describe('test createUser()', () => {
 
     test('test email sudah terdaftar -> error', async () => {
         try {
-            let email = 'usertest@mail.com';
+            let email = 'usertest1@mail.com';
             let password = 'pasword123';
 
             let result = await createUser(email, password);
