@@ -10,15 +10,18 @@ describe('test createUser()', () => {
 
     test('test email belum terdaftar -> sukses', async () => {
         try {
+            let name = 'usertest1';
             let email = 'usertest1@mail.com';
             let password = 'pasword123';
 
-            let result = await createUser(email, password);
+            let result = await createUser(name, email, password);
             user = result;
 
             expect(result).toHaveProperty('id');
+            expect(result).toHaveProperty('name');
             expect(result).toHaveProperty('email');
             expect(result).toHaveProperty('password');
+            expect(result.name).toBe(name);
             expect(result.email).toBe(email);
             expect(result.password).toBe(password);
         } catch (err) {
@@ -28,10 +31,11 @@ describe('test createUser()', () => {
 
     test('test email sudah terdaftar -> error', async () => {
         try {
+            let name = 'usertest1';
             let email = 'usertest1@mail.com';
             let password = 'pasword123';
 
-            let result = await createUser(email, password);
+            let result = await createUser(name, email, password);
 
             expect(result).toBe('error');  // false error
         } catch (err) {
@@ -47,8 +51,10 @@ describe('test getUserById()', () => {
             let result = await getUserById(user.id);
 
             expect(result).toHaveProperty('id');
+            expect(result).toHaveProperty('name');
             expect(result).toHaveProperty('email');
             expect(result).toHaveProperty('password');
+            expect(result.name).toBe(user.name);
             expect(result.email).toBe(user.email);
             expect(result.password).toBe(user.password);
         } catch (err) {
