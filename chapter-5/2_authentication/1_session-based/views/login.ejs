@@ -1,14 +1,10 @@
-<h3>Register</h3>
+<h3>Login</h3>
 <% if(messages.error){ %>
     <p style="color: red;">
         <%= messages.error %>
     </p>
     <% } %>
-        <form action="/register" method="post">
-            <div>
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required>
-            </div>
+        <form action="/login" method="post">
             <div>
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
@@ -17,13 +13,8 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <div>
-                <label for="password_confirmation">Password Confirmation</label>
-                <input type="password" id="password_confirmation" name="password_confirmation" required>
-            </div>
-
             <br />
             <div>
-                <input type="submit" value="Register">
+                <input type="submit" value="Login">
             </div>
         </form>

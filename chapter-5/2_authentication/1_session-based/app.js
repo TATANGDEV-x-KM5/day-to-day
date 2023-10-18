@@ -15,9 +15,9 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// const passport = require('./libs/passport.js')
-// app.use(passport.initialize())
-// app.use(passport.session())
+const passport = require('./libs/passport.js')
+app.use(passport.initialize())
+app.use(passport.session())
 app.use(flash());
 
 const authRouter = require('./routes/auth.routes');
