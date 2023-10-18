@@ -1,6 +1,8 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET_KEY } = process.env;
 
 module.exports = {
     register: async (req, res, next) => {
@@ -48,7 +50,7 @@ module.exports = {
     login: async (req, res, next) => {
         try {
             let { email, password } = req.body;
-            
+
             let user = await prisma.user.findUnique({ where: { email } });
             if (!user) {
                 return res.status(400).json({
@@ -69,10 +71,26 @@ module.exports = {
                 });
             }
 
-            
+            let token = jwt.sign({ id: user.id }, JWT_SECRET_KEY);
+
+            return res.status(200).json({
+                status: true,
+                message: 'OK',
+                err: null,
+                data: { user, token }
+            });
         } catch (err) {
             next(err);
 
         }
+    },
+
+    whoami: (req, res, next) => {
+        return res.status(200).json({
+            status: true,
+            message: 'OK',
+            err: null,
+            data: { user: req.user }
+        });
     }
 };
