@@ -1,0 +1,24 @@
+POST http://localhost:3000/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "name":"sabrina",
+    "email":"sabrina@mail.com",
+    "password":"sabrina123",
+    "password_confirmation":"sabrina123"
+}
+
+
+###
+POST http://localhost:3000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email":"tromadhona@binaracademy.org",
+    "password":"sabrina123"
+}
+
+
+###
+GET http://localhost:3000/api/v1/auth/whoami
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjk3ODA4NDQ3fQ.YB8UswGAaINRf_0r-xBtAkoYRo6qg59SwXNm8Zi7QdM

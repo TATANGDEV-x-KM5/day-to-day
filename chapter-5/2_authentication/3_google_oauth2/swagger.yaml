@@ -1,0 +1,199 @@
+openapi: 3.0.3
+info:
+  title: Authentication
+  description: |-
+    Aplikasi ini akan berguna untuk membantu students memahami proses authentication
+  contact:
+    email: alex@mail.com
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api/v1
+  - url: https://test.binarnews.com/api/v1
+  - url: https://binarnews.com/api/v1
+tags:
+  - name: Auth
+    description: Auth Process
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      operationId: post-auth-register
+      summary: Create a new user
+      description: Creates a new user with the provided information.
+      requestBody:
+        $ref: "#/components/requestBodies/Register"
+      responses:
+        "201":
+          description: Successful user creation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      operationId: post-auth-login
+      summary: User Login
+      description: Login to get token
+      requestBody:
+        $ref: "#/components/requestBodies/Login"
+      responses:
+        "201":
+          description: Successful user creation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+  /auth/google:
+    get:
+      tags:
+        - Auth
+      operationId: post-auth-register
+      summary: Create a new user
+      description: Creates a new user with the provided information.
+      responses:
+        "201":
+          description: Successful user creation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+  /auth/whoami:
+    get:
+      tags:
+        - Auth
+      operationId: get-fetch-user-detail
+      summary: Get user details
+      description: Retrieves details of a specific user.
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/UserModel"
+      security:
+        - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    BasicResponse:
+      title: BasicResponse
+      type: object
+      properties:
+        status:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "success"
+    UserModel:
+      title: User
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "bujang"
+        email:
+          type: string
+          example: "bujang@mail.com"
+    PostModel:
+      title: Post
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "Software Development Life Cycle"
+        isPublished:
+          type: boolean
+          example: true
+    Pagination:
+      title: Pagination
+      type: object
+      properties:
+        links:
+          type: object
+          properties:
+            next:
+              type: string
+              example: "https://domain.com/users?page=3&limit=10"
+            prev:
+              type: string
+              example: "https://domain.com/users?page=1&limit=10"
+        total_items:
+          type: integer
+          example: 100
+  requestBodies:
+    Register:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "sabrina"
+              email:
+                type: string
+                example: "sabrina@mail.com"
+              password:
+                type: string
+                example: "sabrina123"
+              password_confirmation:
+                type: string
+                example: "sabrina123"
+    Login:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                example: "sabrina@mail.com"
+              password:
+                type: string
+                example: "sabrina123"
+    CreatePost:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                example: "Software Development Life Cycle"
+              categories:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: "Programming"
+              authorId:
+                type: integer
+                example: 1
