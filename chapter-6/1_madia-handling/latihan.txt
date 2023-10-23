@@ -1,0 +1,13 @@
+- /storage/images (done)
+
+tambahkan 2 endpoint baru:
+- /storage/videos
+    menerima mimetype:
+    - video/x-msvideo (.avi)
+    - video/mp4 (.mp4)
+    - video/mpeg (.mpeg)
+    folder penyimpanan: /public/videos
+- /storage/documents
+    menerima mimetype:
+    - application/pdf (.pdf)
+    folder penyimpanan: /public/documents
