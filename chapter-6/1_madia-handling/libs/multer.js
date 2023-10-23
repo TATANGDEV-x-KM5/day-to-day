@@ -1,22 +1,19 @@
 const multer = require('multer');
 const path = require('path');
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'public/images');
-    },
-    filename: function (req, file, cb) {
-        const filename = Date.now() + path.extname(file.originalname);
-        cb(null, filename);
-    }
-});
-
-module.exports = {
-    imageStorage: multer({
-        storage: storage,
+function generateStorage(props) {
+    let { location, allowedMimeTypes } = props;
+    return multer({
+        storage: multer.diskStorage({
+            destination: function (req, file, cb) {
+                cb(null, location);
+            },
+            filename: function (req, file, cb) {
+                const filename = Date.now() + path.extname(file.originalname);
+                cb(null, filename);
+            }
+        }),
         fileFilter: (req, file, callback) => {
-            const allowedMimeTypes = ['image/png', 'image/jpeg'];
-
             if (!allowedMimeTypes.includes(file.mimetype)) {
                 const err = new Error(`Only ${allowedMimeTypes.join(', ')} allowed to upload!`);
                 return callback(err, false);
@@ -26,5 +23,27 @@ module.exports = {
         onError: (err, next) => {
             next(err);
         }
+    });
+}
+
+module.exports = {
+    imageStorage: generateStorage({
+        location: 'public/images',
+        allowedMimeTypes: [
+            'image/png',
+            'image/jpeg'
+        ]
+    }),
+    videoStorage: generateStorage({
+        location: 'public/videos',
+        allowedMimeTypes: [
+            'video/x-msvideo',
+            'video/mp4',
+            'video/mpeg'
+        ]
+    }),
+    documentStorage: generateStorage({
+        location: 'public/documents',
+        allowedMimeTypes: ['application/pdf']
     })
 };
