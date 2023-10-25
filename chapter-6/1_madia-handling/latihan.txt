@@ -1,13 +1,28 @@
-- /storage/images (done)
+Latihan:
 
-tambahkan 2 endpoint baru:
-- /storage/videos
-    menerima mimetype:
-    - video/x-msvideo (.avi)
-    - video/mp4 (.mp4)
-    - video/mpeg (.mpeg)
-    folder penyimpanan: /public/videos
-- /storage/documents
-    menerima mimetype:
-    - application/pdf (.pdf)
-    folder penyimpanan: /public/documents
+1.  setup orm prisma
+2.  buat model User (email, password)
+3.  buat model UserProfile (first_name, last_name, birth_date, profile_picture)
+4.  buat endpoint register
+5.  buat endpoint login
+6.  buat endpoint update profile 
+    content-type: multipart/form
+    request:
+    {
+        first_name (text),
+        last_name (text),
+        birth_date (text),
+        profile_picture (file)
+    }
+7.  endpoint /authenticate
+    response:{
+        first_name: "",
+        last_name: "",
+        email: "",
+        birth_date: "",
+        profile_picture: ""
+    }
+8.  upload di git
+9.  link pengumpulan akan di umumkan di group (kamis, 26 oktober 2023)
+
+Note: buat program, fitur boleh diambil dari program yang sudah ada.

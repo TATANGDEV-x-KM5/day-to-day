@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
+app.use(express.json());
+
 app.use('/images', express.static('public/images'));
 app.use('/videos', express.static('public/videos'));
 app.use('/documents', express.static('public/documents'));
