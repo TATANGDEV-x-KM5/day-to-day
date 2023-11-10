@@ -1,0 +1,24 @@
+POST http://localhost:3000/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "name":"tatang",
+    "email":"tatang.romadhona@rushowl.sg",
+    "password":"tatang123",
+    "password_confirmation":"tatang123"
+}
+
+
+###
+POST http://localhost:3000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email":"tatang.romadhona@rushowl.sg",
+    "password":"tatang123"
+}
+
+
+###
+GET http://localhost:3000/api/v1/auth/whoami
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTY5OTYyODMyOH0.O5nxaQfKWMSPr51w7qkNRCZtGJNlWZU2vElLDRdnwn0

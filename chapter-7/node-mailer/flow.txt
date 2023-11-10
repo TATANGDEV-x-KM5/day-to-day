@@ -1,0 +1,3 @@
+- mengirimkan email aktivasi ketika proses registrasi berhasil
+- didalam email, terdapat link halaman aktivasi email di frontend
+- halaman tersebut, akan melakukan request kedalam backend untuk melakukan aktivasi
