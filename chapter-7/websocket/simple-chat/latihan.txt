@@ -1,0 +1,3 @@
+1. tampilkan pop up input nama client
+2. buat komponen html baru untuk menampilkan nama
+3. include nama saat emit pesan kedalam websocet (Sabrina: halo!)
