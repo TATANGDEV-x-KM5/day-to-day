@@ -1,0 +1,7 @@
+- tambahkan property is_read(boolean) kedalam database
+- set is_read=false ketika membuat notifikasi baru
+- modifikasi notification.ejs title bisa di klik
+- buat endpoint PUT /notification/{notif_id}/mark-is-read
+    - set is_read=true
+    - rewrite dummy database (db.json)
+    - redirect kembali ke GET /notification?user_id={user_id}

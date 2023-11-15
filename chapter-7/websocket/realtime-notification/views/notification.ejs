@@ -43,9 +43,15 @@
 
     <main>
         <section>
-            <p id="userId"><%= user_id %></p>
+            <p id="userId">
+                <%= user_id %>
+            </p>
             <h2>Notification List</h2>
             <ul id="notificationList">
+                <li>
+                    <b style="color: gray;">Yang sudah dibaca</b>
+                    <p style="color: gray;">pesan ini sudah dibaca</p>
+                </li>
                 <% notifications.forEach(item=>{ %>
                     <li>
                         <b>
@@ -55,7 +61,6 @@
                             <%= item.body%>
                         </p>
                     </li>
-                    </br>
                     <% }) %>
             </ul>
         </section>
@@ -66,21 +71,19 @@
     </footer>
 
     <!-- You can add additional scripts for handling notifications if needed -->
-    <script src="/socket.io/socket.io.js"></script>
+    <script src=" /socket.io/socket.io.js">
+    </script>
     <script>
         let socket = io();
         let userId = document.getElementById("userId");
-        let notifTopic = `user-${userId.textContent}`;
-        console.log(notifTopic)
+        let notifTopic = `user-${userId.textContent.replace(/\s/g, "")}`;
         let notificationList = document.getElementById("notificationList");
 
         socket.on(notifTopic, notif => {
-            console.log("new notif")
-            console.log(notif)
             let item = document.createElement('li');
-            item.textContent = `<b>${notif.title}</b>
+            item.innerHTML = `<b>${notif.title}</b>
             <p>${notif.body}</p>`;
-            notificationList.appendChild(item);
+            notificationList.append(item);
         })
 
     </script>

@@ -1,4 +1,23 @@
 {
-    "notification_id": 1,
-    "notifications": []
+    "notification_id": 4,
+    "notifications": [
+        {
+            "id": 1,
+            "user_id": 2,
+            "title": "test",
+            "body": "test 4"
+        },
+        {
+            "id": 2,
+            "user_id": 1,
+            "title": "New message",
+            "body": "pesan baru"
+        },
+        {
+            "id": 3,
+            "user_id": 1,
+            "title": "New message 2",
+            "body": "pesan baru kedua"
+        }
+    ]
 }

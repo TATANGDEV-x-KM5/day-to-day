@@ -2,9 +2,9 @@ POST http://localhost:3000/notification
 Content-Type: application/json
 
 {
-    "user_id":2,
-    "title":"test",
-    "body":"test 4"
+    "user_id":1,
+    "title":"New message 2",
+    "body":"pesan baru kedua"
 }
 
 ###
