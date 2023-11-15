@@ -1,0 +1,11 @@
+POST http://localhost:3000/notification
+Content-Type: application/json
+
+{
+    "user_id":2,
+    "title":"test",
+    "body":"test 4"
+}
+
+###
+GET http://localhost:3000/notification?user_id=1
